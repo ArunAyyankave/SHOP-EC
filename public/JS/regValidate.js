@@ -72,7 +72,7 @@ const validateInputs = () => {
     }
     //start  fghjhkjhkj
     if(mobileValue === '') {
-        setError(mobile, 'mobile is required');
+        setError(mobile, 'Mobile is required');
         prevm = 0;
     } else {
         setSuccess(mobile);

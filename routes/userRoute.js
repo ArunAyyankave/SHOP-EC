@@ -31,7 +31,7 @@ user_route.post('/register',userController.insertUser);
 
 user_route.post('/verify',userController.verifyPhone);
 
-user_route.get('/',userController.LandingPage);
+user_route.get('/',auth.isLogout,userController.LandingPage);
 user_route.get('/login',auth.isLogout,userController.loginLoad);
 
 user_route.post('/login',userController.verifyLogin);
@@ -39,5 +39,12 @@ user_route.post('/login',userController.verifyLogin);
 user_route.get('/userhome',auth.isLogin,userController.loaduserHome);
 
 user_route.get('/logout',auth.isLogin,userController.userLogout);
+
+//product
+user_route.get('/productDetails/:id',userController.loadProduct)
+
+const cartController = require("../controllers/cartController")
+user_route.get('/cart/:id',cartController.loadCart)
+user_route.get('/addToCart/:id',cartController.addToCart)
 
 module.exports = user_route;

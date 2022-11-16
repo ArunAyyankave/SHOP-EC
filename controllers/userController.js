@@ -1,4 +1,6 @@
 const User = require('../models/userModel');
+const Product = require('../models/productModel')
+const Category = require('../models/categoryModel')
 const bcrypt = require('bcrypt');
 const nodemailer = require("nodemailer");
 
@@ -206,7 +208,9 @@ const loadHome = async(req,res)=>{
 const loaduserHome = async(req,res)=>{
     try {
         const userData =  await User.findById({ _id:req.session.user_id });
-        res.render('userhome',{ user:userData });
+        const productData = await Product.find({})
+        const categoryData = await Category.find({})
+        res.render('userhome',{ user:userData, product:productData, category:categoryData });
 
     } catch (error) {
         console.log(error.message);
@@ -229,11 +233,23 @@ const userLogout = async(req,res)=>{
 const LandingPage = async(req, res)=>{
 
     try {
-        res.render('landingPage')
+        const productData = await Product.find({})
+        const categoryData = await Category.find({})
+        res.render('userhome',{product:productData, category:categoryData })
     } catch (error) {
         console.log(error.message);
     }
 
+}
+
+const loadProduct = async(req, res)=>{
+    try {
+        const { id } = req.params
+        const productDetails = await Product.findById(id)
+        res.render('productDetails',{details:productDetails})
+    } catch (error) {
+        console.log(error.message);
+    }
 }
 
 
@@ -247,5 +263,6 @@ module.exports = {
     userLogout,
     LandingPage,
     loaduserHome,
-    verifyPhone
+    verifyPhone,
+    loadProduct,
 }

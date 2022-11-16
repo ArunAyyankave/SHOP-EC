@@ -54,7 +54,6 @@ admin_route.get('/delete-user',adminController.deleteUser);
 
 
 //for products start
-
 const productController = require("../controllers/productController");
 
 admin_route.get('/products',auth.isLogin,productController.loadProducts);
@@ -66,8 +65,35 @@ admin_route.get('/edit-product',auth.isLogin, productController.editProductLoad)
 admin_route.post('/edit-product',upload.single('image'),productController.updateProduct);
 
 admin_route.get('/delete-product',productController.deleteProduct);
-
 //product end
+
+//categories start
+const categoryController = require("../controllers/categoryController");
+
+admin_route.get('/categories',auth.isLogin,categoryController.loadCategories)
+
+//admin_route.get('/new-category',auth.isLogin,categoryController.newCategoryLoad);
+admin_route.post('/new-category',categoryController.addCategory);
+
+//admin_route.get('/edit-category',auth.isLogin, categoryController.editCategoryLoad);
+admin_route.post('/edit-category',categoryController.updateCategory);
+
+admin_route.get('/delete-category',categoryController.deleteCategory);
+//categories end
+
+//brands start
+const brandController = require("../controllers/brandController");
+
+admin_route.get('/brands',auth.isLogin,brandController.loadBrands)
+
+//admin_route.get('/new-brand',auth.isLogin,brandController.newBrandLoad);
+admin_route.post('/new-brand',brandController.addBrand);
+
+//admin_route.get('/edit-brand',auth.isLogin, brandController.editBrandLoad);
+admin_route.post('/edit-brand',brandController.updateBrand);
+
+admin_route.get('/delete-brand',brandController.deleteBrand);
+//brands end
 
 
 admin_route.get('*',function(req,res){
