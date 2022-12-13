@@ -40,17 +40,9 @@ admin_route.get('/home',auth.isLogin,adminController.loadDashboard);
 
 admin_route.get('/logout',auth.isLogin,adminController.logout);
 
-admin_route.get('/dashboard',auth.isLogin,adminController.adminDashboard);
+admin_route.get('/dashboard',auth.isLogin,adminController.loadUsers);
 
-admin_route.get('/new-user',auth.isLogin,adminController.newUserLoad);
-
-admin_route.post('/new-user',upload.single('image'),adminController.addUser);
-
-admin_route.get('/edit-user',auth.isLogin, adminController.editUserLoad);
-
-admin_route.post('/edit-user',adminController.updateUsers);
-
-admin_route.get('/delete-user',adminController.deleteUser);
+admin_route.get('/delete-user',adminController.blockUser);
 
 
 //for products start
@@ -94,6 +86,25 @@ admin_route.post('/edit-brand',brandController.updateBrand);
 
 admin_route.get('/delete-brand',brandController.deleteBrand);
 //brands end
+
+//coupen
+const couponController = require('../controllers/couponController') 
+
+admin_route.get('/coupons', auth.isLogin, couponController.coupens)
+admin_route.get('/addCoupen', auth.isLogin, couponController.addCoupen)
+admin_route.post('/saveCoupen', auth.isLogin, couponController.saveCoupen)
+admin_route.delete('/deleteCoupen/:id', auth.isLogin, couponController.deleteCoupen)
+
+//orders
+admin_route.get('/orders', adminController.productOrders)
+admin_route.post('/orderitems',adminController.orderItems)
+
+//banners
+const bannerController = require('../controllers/bannerController')
+
+admin_route.get('/setBanner', bannerController.setBanner)
+admin_route.get('/addbanner', bannerController.addBanner)
+admin_route.post('/addBanner/add', bannerController.saveBanner)
 
 
 admin_route.get('*',function(req,res){

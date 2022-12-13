@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP EC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <form id="form" action="/admin/saveCoupen" method="post">
+            <h1>Add New Coupon</h1>
+            <div class="input-control">
+                <label for="name">Coupon Code</label>
+                <input id="name" name="code" type="text" required>
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="category">Discount Amount</label>
+                <input id="category" name="discount" type="text" required>
+                <div class="error"></div>
+            </div>
+            
+            <button type="submit">Save</button>
+
+            <% if(typeof message !== 'undefined'){ %>
+                <p style="color: red;"><%= message %></p>
+            <% } %>
+        </form>
+
+        
+    </div>
+</body>
+</html>

@@ -146,8 +146,8 @@
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
-                            <a href="" class="nav-item nav-link">Login</a>
-                            <a href="" class="nav-item nav-link">Register</a>
+                            <a href=""><h5 class="nav-item nav-link"><%= userData.name %></h5></a>
+                            <a href="" class="nav-item nav-link"></a>
                         </div>
                     </div>
                 </nav>
@@ -169,12 +169,16 @@
 
     <!-- Cart Start -->
     <div class="container-fluid pt-5">
+        
+        <% if(cartList.length> 0) { %>
+            
         <div class="row px-xl-5">
             <div class="col-lg-8 table-responsive mb-5">
                 <table class="table table-bordered text-center mb-0">
                     <thead class="bg-secondary text-dark">
                         <tr>
                             <th>Products</th>
+                            <th>Image</th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Total</th>
@@ -182,149 +186,142 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle">
-                        <tr>
-                            <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
+
+                        <% cartList.forEach((p)=>{ %>
+                            <% p.product.forEach((p2)=> { %>
+
+                        <tr id="row<%= p.item %>">
+
+                            
+                            <td class="align-middle">
+                                <%= p2.name %>
+                            </td>
+                            <td class="align-middle"><img src="/productImages/<%= p2.image %> " alt=""
+                                    style="width: 50px;"> </td>
+                            <td class="align-middle "> Rs.<span id="price<%= p.item %>">
+                                    <%= p2.price %>
+                                </span> </td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
+                                        <button type="button" id="minus" onclick="dec('<%= p.item %>')"
+                                            class="btn btn-sm btn-primary btn-minus">
+                                            <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
+                                    <input type="text" readonly
+                                        class="form-control form-control-sm bg-secondary text-center"
+                                        value="<%= p.itemQuantity %> " id="<%= p.item %>">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
+                                        <button type="button" onclick="inc('<%= p.item %>')"
+                                            class="btn btn-sm btn-primary btn-plus" id="plus">
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </div>
                                 </div>
                             </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                            <% const total=parseInt(p.itemQuantity)*parseInt(p2.price) %>
+                                <td class="align-middle ">Rs.<span id="total<%= p.item %>">
+                                        <%= total %>
+                                    </span> </td>
+                                <td class="align-middle">
+                                    <button type="button" data-toggle="modal"
+                                        data-target="#exampleModal<%= p.item %>"
+                                        class="btn btn-sm btn-primary"><i
+                                            class="fa fa-times"></i></button>
+                                </td>
                         </tr>
-                        <tr>
-                            <td class="align-middle"><img src="img/product-2.jpg" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle"><img src="img/product-3.jpg" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle"><img src="img/product-4.jpg" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle"><img src="img/product-5.jpg" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
+
+                        <% }) %>
+                                <% }) %>
+                        
                     </tbody>
                 </table>
             </div>
-            <div class="col-lg-4">
-                <!-- <form class="mb-5" action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control p-4" placeholder="Coupon Code">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary">Apply Coupon</button>
-                        </div>
+            
+
+        <div class="col-lg-4">
+            <div class="input-group mb-5">
+                <input type="text" class="form-control p-4" id="usercode" name="usercode"
+                    placeholder="Coupon Code" required>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" id="button" type="button" onclick="coupen()">Apply
+                        Coupon</button>
+                </div>
+            </div>
+            <div class="card border-secondary mb-5">
+                <div class="card-header bg-secondary border-0">
+                    <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3 pt-1">
+                        <h6 class="font-weight-medium">Subtotal</h6>
+                        <h6 class="font-weight-medium">Rs. <span id="subtotal">
+                                <%= subtotal %>
+                            </span> </h6>
                     </div>
-                </form> -->
-                <div class="card border-secondary mb-5">
-                    <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                    <div class="d-flex justify-content-between mb-3">
+                        <h6 class="font-weight-medium">Shipping</h6>
+                        <h6 class="font-weight-medium">Rs.<span id="shipping">
+                                <%= shipping%>
+                            </span> </h6>
                     </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-3 pt-1">
-                            <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 class="font-weight-medium">$150</h6>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">$10</h6>
-                        </div>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-medium">Discount</h6>
+                        <h6 class="font-weight-medium">Rs.<span id="discount">0</span> </h6>
                     </div>
-                    <div class="card-footer border-secondary bg-transparent">
-                        <div class="d-flex justify-content-between mt-2">
-                            <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">$160</h5>
-                        </div>
-                        <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                </div>
+                <div class="card-footer border-secondary bg-transparent">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h5 class="font-weight-bold">Total</h5>
+                        <h5 class="font-weight-bold">Rs. <span id="grandtotal">
+                                <%= grandtotal %>
+                            </span> </h5>
                     </div>
+                    <a href="/checkout/<%= cartList[0]._id %> "
+                        class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
                 </div>
             </div>
         </div>
     </div>
+    <% } else { %>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="text-danger">Nothing is in your Cart !!!</h3>
+                <h5 class="pt-2">Add products to Cart</h5>
+                <a class="btn btn-primary rounded font-weight-bold" href="/allProducts">Add</a>
+            </div>
+        </div>
+        <% }%>
+        
+    </div>
     <!-- Cart End -->
+
+    <% cartList.forEach((p)=>{ %>
+        <% p.product.forEach((p2)=> { %>
+            <div class="modal fade" id="exampleModal<%= p.item %>" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Remove Item</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Do you want remove this Item from Cart ..?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" onclick="itemDel('<%= p.item %>')" class="btn btn-danger"
+                                data-dismiss="modal">
+                                Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }) }) %>
 
 
     <!-- Footer Start -->
@@ -417,3 +414,108 @@
 </body>
 
 </html>
+
+
+<script>
+    function inc(id) {
+        let discount = document.getElementById('discount').innerHTML
+        let count = document.getElementById(id).value
+        let price = document.getElementById('price' + id).innerHTML
+        fetch('/itemInc/' + id, {
+            method: 'post',
+            headers: {
+                'Content-type': 'application/json',
+                body: JSON.stringify({ hai: "jhj" })
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById(id).value++
+                document.getElementById('total' + id).innerHTML = parseInt(price) * parseInt(document.getElementById(id).value)
+                document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('price' + id).innerHTML)
+                document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)-parseInt(document.getElementById('discount').innerHTML)
+            })
+    } 
+    function dec(id) {
+        let price = document.getElementById('price' + id).innerHTML
+        let count = document.getElementById(id).value
+        let row = document.getElementById('row' + id)
+        if (count == 1) {
+            fetch('/itemDelete/' + id, {
+                method: 'put',
+                headers: {
+                    'Content-type': 'application/json',
+                    body: JSON.stringify({ hai: "jhj" })
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('total' + id).innerHTML)
+                    document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
+                    row.remove()
+                    success: location.reload()
+                })
+        } else {
+            fetch('/itemDec/' + id, {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                    body: JSON.stringify({ hai: "jhj" })
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById(id).value--
+                    document.getElementById('total' + id).innerHTML = parseInt(price) * parseInt(document.getElementById(id).value)
+                    document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('price' + id).innerHTML)
+                    document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)-parseInt(document.getElementById('discount').innerHTML)
+                })
+        }
+    }
+    function itemDel(id) {
+        
+        let price = document.getElementById('price' + id).innerHTML
+        let count = document.getElementById(id).value
+        let row = document.getElementById('row' + id)
+        
+        fetch('/itemDelete/' + id, {
+            method: 'put',
+            headers: {
+                'Content-type': 'application/json',
+                body: JSON.stringify({ hai: "jhj" })
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('total' + id).innerHTML)
+                document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
+                row.remove()
+                success: location.reload()
+            })
+    }
+    function coupen() {
+        const usercode = document.getElementById('usercode').value
+        let disc = document.getElementById('discount').innerHTML
+        fetch('/applyCoupen/' + usercode, {
+            method: 'post',
+            headers: {
+                'Content-type': 'application/json',
+                body: JSON.stringify({ jfd: disc })
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                discount = data.success
+                
+                if (parseInt(document.getElementById('grandtotal').innerHTML) > 15000) {
+                    if (parseInt(document.getElementById('discount').innerHTML) > 0) {
+                        document.getElementById('button').disabled = true
+                    } else {
+                        document.getElementById('discount').innerHTML = discount
+                        document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('grandtotal').innerHTML) - parseInt(discount)
+                        
+                    }
+                }
+            })
+    }
+</script>

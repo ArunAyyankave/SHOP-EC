@@ -3,7 +3,7 @@ const Brand = require("../models/brandModel");
 
 const loadBrands = async(req,res)=>{
     try {
-        const brandData = await Brand.find({})
+        const brandData = await Brand.find({ deleteStatus: false })
         res.render('brands',{brands:brandData})
     } catch (error) {
         console.log(error.message);
@@ -68,7 +68,7 @@ const updateBrand = async(req, res)=>{
 const deleteBrand = async(req, res)=>{
     try {
         const id = req.query.id;
-        await Brand.deleteOne({ _id:id });
+        await Brand.findByIdAndUpdate(id, { deleteStatus: true })
         res.redirect('/admin/brands');
     } catch (error) {
         console.log(error.message);

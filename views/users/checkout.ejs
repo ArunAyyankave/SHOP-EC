@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Shop EC - Checkout</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/landing.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"
+        integrity="sha512-CX7sDOp7UTAq+i1FYIlf9Uo27x4os+kGeoT7rgwvY+4dmjqV0IuE/Bl5hVsjnQPQiTOhAX1O2r2j5bjsFBvv/A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-secondary py-2 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark" href="">FAQs</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Help</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Support</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-dark pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="" class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border px-3 mr-1">Shop</span>EC</h1>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+
+    <div class="col-lg-9">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+            <a href="" class="text-decoration-none d-block d-lg-none">
+                <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                        class="text-primary font-weight-bold border px-3 mr-1">Shop</span>EC</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="/cart/<%= cartList[0]._id %> " class="nav-item nav-link">Cart List</a>
+
+
+                </div>
+
+            </div>
+        </nav>
+    </div>
+    </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Checkout</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="/cart/<%= cartList[0]._id %> ">Cart List</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Checkout</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <!-- <% cartList.forEach((p) => { %> 
+            
+                <% }) %>  -->
+            <form id="pay" action="" method="post">
+                <div class="col-lg-8 float-left">
+                    <div class="mb-4">
+
+                        <input type="hidden" value="<%= cartList[0]._id %>" name="cartId">
+
+                        <h4 class="font-weight-semi-bold mb-4">Billing Address</h4>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Name</label>
+                                <input class="form-control" name="name" type="text" placeholder="Your Name"
+                                    value="<%= user.name %> " required>
+                            </div>
+                            
+                            <div class="col-md-6 form-group">
+                                <label>E-mail</label>
+                                <input class="form-control" name="email" type="text" placeholder="example@email.com"
+                                    value="<%= user.email %>" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Mobile No</label>
+                                <input class="form-control" type="text" name="mobile" placeholder="Mobile no"
+                                    value="<%= user.mobile %>" required>
+                            </div>
+
+                            
+                            <% for(let i=0; i < address.length; i++) { %>
+                                <div class="col-md-12 form-group d-flex ">
+                                    <div class="col-md-1">
+                                        <input class="w-75" type="radio" id="address" placeholder="House No"
+                                            name="addressLine"
+                                            value="<%= address[i].houseNo %>, <%= address[i].street %>, <%= address[i].district %>, <%= address[i].state %>, <%= address[i].pincode %>"
+                                            required>
+                                    </div>
+                                    <label>
+                                        <%= address[i].houseNo %>, <%= address[i].street %>, <%= address[i].district %>,
+                                                    <%= address[i].state %>, <%= address[i].pincode %>
+                                    </label>
+                                </div>
+                                <% } %>
+                                
+
+
+
+
+
+                        </div>
+                        
+                        <% if(address.length> 0) { %>
+                            <a class="btn btn-primary" href="/checkoutAddress">Add Another Address</a>
+                        <% } else { %>
+                            <a class="btn btn-primary" href="/checkoutAddress">Add Address</a>
+                        <% } %>
+                                
+                    </div>
+
+
+
+
+
+
+
+
+
+                </div>
+                <div class="col-lg-4 float-left">
+                    <div class="card border-secondary mb-5">
+                        <div class="card-header bg-secondary border-0">
+                            <h4 class="font-weight-semi-bold m-0">Order Total</h4>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="font-weight-medium mb-3">Products</h5>
+
+                            <% cartList.forEach((p)=> { %>
+                                <% p.product.forEach((p1)=> { %>
+                                    <div class="d-flex justify-content-between">
+                                        <p>
+                                            <%= p1.name %> - <%= p.itemQuantity %> Pcs
+                                        </p>
+                                        <% const total=parseInt(p1.price)*parseInt(p.itemQuantity) %>
+                                            <p class="text-success">Rs.<%= total %>
+                                            </p>
+                                    </div>
+                                    <% }) %>
+                                        <% }) %>
+                                            <hr class="mt-0">
+                                            <div class="d-flex justify-content-between mb-3 pt-1">
+                                                <h6 class="font-weight-medium">Subtotal</h6>
+                                                <h6 class="font-weight-medium">Rs.<%= subtotal %>
+                                                </h6>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-3">
+                                                <h6 class="font-weight-medium">Shipping</h6>
+                                                <h6 class="font-weight-medium">Rs.<%= shipping %>
+                                                </h6>
+                                            </div>
+                                            <% if(discount) { %>
+                                                <div class="d-flex justify-content-between">
+                                                    <h6 class="font-weight-medium">Discount</h6>
+                                                    <h6 class="font-weight-medium">Rs.<%= discount %>
+                                                    </h6>
+                                                </div>
+                                                <% } %>
+                        </div>
+                        <div class="card-footer border-secondary bg-transparent">
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5 class="font-weight-bold">Total</h5>
+                                <h5 class="font-weight-bold">Rs.<%= grandtotal %>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-secondary mb-5">
+                        <div class="card-header bg-secondary border-0">
+                            <h4 class="font-weight-semi-bold m-0">Payment</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" name="payment" id="paypal"
+                                        value="cod" required>
+                                    <label class="custom-control-label" for="paypal">COD</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" name="payment" value="online"
+                                        id="directcheck" required>
+                                    <label class="custom-control-label" for="directcheck">Online Payment</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+
+                        <% if(address.length> 0) { %>
+                            <div class="card-footer border-secondary bg-transparent">
+                                <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" id="order"
+                                    type="submit">Place Order</button>
+                            </div>
+                            <% } else { %>
+                                <div>
+                                    <h6 class="text-danger">Your address is not added to place order..?</h6>
+                                    <h4 class="text-success">Please add an address...</h4>
+                                </div>
+                                <% } %>
+                                
+                    </div>
+                </div>
+        </div>
+        </form>
+    </div>
+    <!-- Checkout End -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        $("#pay").submit((e) => {
+            e.preventDefault()
+            $.ajax({
+                url: '/placeOrder',
+                method: 'post',
+                data: $("#pay").serialize(),
+                success: (response) => {
+                    // alert(response)
+                    if (response.codSuccess) {
+                        location.href = '/orderSuccess'
+                    } else {
+                        razorpayPayment(response)
+                    }
+                }
+            })
+        })
+        function razorpayPayment(order) {
+            var options = {
+                "key": "rzp_test_9J0kfMWwmcIo5S", // Enter the Key ID generated from the Dashboard
+                "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Shop EC",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+                    
+                    verifyPayment(response, order)
+                },
+                "prefill": {
+                    "name": "Gaurav Kumar",
+                    "email": "gaurav.kumar@example.com",
+                    "contact": "9999999999"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options)
+            rzp1.open();
+        }
+        function verifyPayment(payment, order) {
+            $.ajax({
+                url: '/verifyPay',
+                data: {
+                    payment,
+                    order
+                },
+                method: 'post',
+                success: (response) => {
+                    if (response.status) {
+                        location.href = '/orderSuccess'
+                    } else {
+                        alert("Payment failed")
+                    }
+                }
+            })
+        }
+    </script>

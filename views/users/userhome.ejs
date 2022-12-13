@@ -77,14 +77,19 @@
                 </form>
             </div>
             <div class="col-lg-3 col-6 text-right">
-                <a href="" class="btn border">
+                <% if(typeof user!=='undefined'){ %>
+                    <a href="/wishlist/<%= wishlistItems._id %>" class="btn border">
+                <% }else{ %> 
+                    <a href="" class="btn border"></a> 
+                <% } %> 
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
+
                 <% if(typeof user!=='undefined'){ %>
-                <a href="/cart/<%= user._id %>" class="btn border">
+                    <a href="/cart/<%= user._id %>" class="btn border">
                 <% }else{ %>    
-                <a href="" class="btn border">
+                    <a href="" class="btn border">
                 <% } %> 
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span class="badge">0</span>
@@ -105,24 +110,9 @@
                 </a>
                 <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                        <!-- <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">Accerssories <i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="" class="dropdown-item">Monitor</a>
-                                <a href="" class="dropdown-item">Keyboard</a>
-                                <a href="" class="dropdown-item">Mouse</a>
-                            </div>
-                        </div> -->
-                        <!-- <a href="" class="nav-item nav-link">Laptops</a>
-                        <a href="" class="nav-item nav-link">Mobiles</a>
-                        <a href="" class="nav-item nav-link">Television</a>
-                        <a href="" class="nav-item nav-link">Tablets</a>
-                        <a href="" class="nav-item nav-link">Headphones</a>
-                        <a href="" class="nav-item nav-link">Pendrive</a>
-                        <a href="" class="nav-item nav-link">SD card</a>
-                        <a href="" class="nav-item nav-link">SSD</a> -->
+                        
                         <% category.forEach((category)=>{ %>
-                        <a href="" class="nav-item nav-link"><%= category.name %></a>
+                        <a href="/user/singleProduct/<%= category._id %>" class="nav-item nav-link"><%= category.name %></a>
                         <% }) %>
                     </div>
                 </nav>
@@ -138,20 +128,11 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="shop.html" class="nav-item nav-link">Shop</a>
-                            <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                </div>
-                            </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="/viewOrders" class="nav-item nav-link">Orders</a>
                         </div>
                         <% if(typeof user!=='undefined'){ %>
                         <div class="navbar-nav ml-auto py-0">
-                            <h5 class="nav-item nav-link"><%= user.name %></h5>
+                            <a href="/userProfile/<%= user._id %>"><h5 class="nav-item nav-link"><%= user.name %></h5></a>
                             <a href="/logout" class="nav-item nav-link">Logout</a>
                         </div>
                         <% }else{ %>
@@ -312,17 +293,21 @@
             <% product.forEach((product)=>{ %>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="/productImages/<%= product.image %>" alt="">
-                    </div>
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3"><%= product.name %></h6>
-                        <div class="d-flex justify-content-center">
-                            <h6>Rs. <%= product.price %></h6><h6 class="text-muted ml-2"><del></del></h6>
+                    <a href="/productDetails/<%= product._id %>">
+                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="/productImages/<%= product.image %>" alt="">
                         </div>
-                    </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3"><%= product.name %></h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>Rs. <%= product.price %></h6><h6 class="text-muted ml-2"><del></del></h6>
+                            </div>
+                        </div>
+                    </a>
+                    
                     <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="/productDetails/<%= product._id %>" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                        <!-- <a href="" onclick="wishlist('<%= //product._id %>')" class="btn btn-sm text-dark p-0"><i class="fas fa-heart text-primary"></i> Wishlist</a> -->
+                        <a href="/addToWishlist/<%= product._id %>" class="btn btn-sm text-dark p-0"><i class="fas fa-heart text-primary"></i> Wishlist</a>
                         <a href="/addToCart/<%= product._id %>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                     </div>
                 </div>
@@ -634,3 +619,23 @@
 </body>
 
 </html>
+
+<script>
+     function wishlist(id) {
+                    fetch('/addToWishlist/' + id, {
+                        method: 'get',
+                        headers: {
+                            'Content-type': 'application/json',
+                            body: JSON.stringify({ hai: "jhj" })
+                        }
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success == true) {
+                                document.getElementById('message').innerHTML = "<div class='text-success'> Item added to your Wishlist successfully...</div>"
+                            } else {
+                                document.getElementById('message').innerHTML = "<div class='text-danger'>Item already exist in your Wishlist !!!</div>"
+                            }
+                        })
+                }
+</script>

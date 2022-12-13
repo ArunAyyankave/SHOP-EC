@@ -2,7 +2,7 @@ const Category = require("../models/categoryModel");
 
 const loadCategories = async(req,res)=>{
     try {
-        const categoryData = await Category.find({})
+        const categoryData = await Category.find({ deleteStatus: false })
         res.render('categories',{categories:categoryData})
     } catch (error) {
         console.log(error.message);
@@ -67,8 +67,16 @@ const updateCategory = async(req, res)=>{
 const deleteCategory = async(req, res)=>{
     try {
         const id = req.query.id;
-        await Category.deleteOne({ _id:id });
+        await Category.findByIdAndUpdate(id, { deleteStatus: true })
         res.redirect('/admin/categories');
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+const singleProduct = async(req, res)=>{
+    try {
+        
     } catch (error) {
         console.log(error.message);
     }
@@ -80,7 +88,9 @@ module.exports = {
     addCategory,
     editCategoryLoad,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+
+    singleProduct
 }
 
 
